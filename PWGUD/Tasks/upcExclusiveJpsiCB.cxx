@@ -10,21 +10,23 @@
 // or submit itself to any jurisdiction.
 //
 
-#include <iostream>
-#include <cmath>
-#include <cstdlib>
-#include <string>
-#include <vector>
+#include "PWGUD/Core/SGSelector.h"
+#include "PWGUD/Core/SGTrackSelector.h"
+#include "PWGUD/DataModel/UDTables.h"
+
+#include "Framework/AnalysisDataModel.h"
+#include "Framework/AnalysisTask.h"
+#include "Framework/runDataProcessing.h"
+
 #include "Math/Vector4D.h"
 #include "TDatabasePDG.h"
 #include "TMath.h"
 
-#include "Framework/runDataProcessing.h"
-#include "Framework/AnalysisTask.h"
-#include "Framework/AnalysisDataModel.h"
-#include "PWGUD/DataModel/UDTables.h"
-#include "PWGUD/Core/SGSelector.h"
-#include "PWGUD/Core/SGTrackSelector.h"
+#include <cmath>
+#include <cstdlib>
+#include <iostream>
+#include <string>
+#include <vector>
 
 using namespace o2;
 using namespace o2::aod;
@@ -163,7 +165,8 @@ struct upcExclusiveJpsiCB {
 
       registry.fill(HIST("hSelectionCounter"), 2);
 
-      if(collision.flags()!=1) return; //UPC setting vs std setting
+      if (collision.flags() != 1)
+        return; // UPC setting vs std setting
       //____________________________________________________________________________________
 
       // Create LorentzVector to store all tracks, Pion tracks and TPC Pion PID
@@ -204,7 +207,7 @@ struct upcExclusiveJpsiCB {
 
       //_____________________________________
       // Add all onlyPionTracks into p
-      for (const auto &pion : onlyPionTracks) {
+      for (const auto& pion : onlyPionTracks) {
         p += pion;
       }
 
